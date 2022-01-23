@@ -1,0 +1,20 @@
+import './fonts.css';
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+  html,
+  *, *::after, *::before {
+    box-sizing: border-box;
+  }
+
+  body,
+  a, button {
+    font-family: 'Montserrat', sans-serif;  
+  }
+  
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+`;

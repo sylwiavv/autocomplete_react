@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../autocomplete_js/autocomplete_js/.idea/autocomplete_js.iml" filepath="$PROJECT_DIR$/../autocomplete_js/autocomplete_js/.idea/autocomplete_js.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/autocomplete_react.iml" filepath="$PROJECT_DIR$/.idea/autocomplete_react.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react_roman/study-buddy/.idea/study-buddy.iml" filepath="$PROJECT_DIR$/../react_roman/study-buddy/.idea/study-buddy.iml" />
     </modules>
   </component>
 </project>
