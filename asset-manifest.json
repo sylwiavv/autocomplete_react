@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/autocomplete_react/static/css/main.28c8b3b2.css",
+    "main.js": "/autocomplete_react/static/js/main.6a4fc352.js",
+    "index.html": "/autocomplete_react/index.html",
+    "main.6a4fc352.js.map": "/autocomplete_react/static/js/main.6a4fc352.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28c8b3b2.css",
+    "static/js/main.6a4fc352.js"
+  ]
+}
