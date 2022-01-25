@@ -1,44 +1,54 @@
 import React, { useState } from 'react';
 import { Wrapper } from "components/ResultList/ResultList.styles";
-import ResultListItem from "../ResultListItem/ResultListItem";
+import { WrapperLi } from "../ResultListItem/ResultListItem.styles";
 import { technologies } from "data/technologies";
-import  { escapeRegExp } from "helpers/helpers"
-let resultsListItems = [];
+import { InputAutoComplete } from "../InputAutoComplete/InputAutoComplete.styles";
 
 const ResultList = () => {
-    const [resultItemsArrayState, setResultItemsArrayState] = useState([]);
-    const resultListAutoComplite = document.querySelector('.selected-list__autocomplete');
+    const [text, setText] = useState('');
+    const [results, setResults] = useState([]);
+    const [state, setState] = useState("");
+    const toggleAccordion = () => {
+        setState(state === "" ? "not-empty" : "");
+    }
 
-    const handleInputOnChange = (e) => {
-        let inputValue = e.target.value;
-        resultsListItems.push(inputValue);
-
-        technologies.forEach((technology) => {
-            const technologyItem = technology.toLowerCase().replace(/\s/g, "");
-            const matchItems = technologyItem.match(escapeRegExp(inputValue.toLowerCase().replace(/\s/g, '')));
-            // If element does not match then match method returns null
-            if (matchItems !== null) {
-                resultsListItems.push(technology);
+    const onChangeHandler = (text) => {
+        if (!text) {
+            setText('');
+            setResults([]);
+            toggleAccordion();
+        } else {
+            let matches = [""];
+            if (matches.length > 0) {
+                matches = technologies.filter(tech => {
+                    const regex = new RegExp(`${text}`, "gi");
+                    return tech.match(regex);
+                })
             }
-        });
-        console.log(resultsListItems);
-        setResultItemsArrayState(...resultItemsArrayState, resultsListItems);
-    };
-
-    React.useEffect(() => {
-        const inputAutoComplete = document.querySelector('.input__autocomplete');
-        inputAutoComplete.addEventListener("input", handleInputOnChange);
-        // cleanup this component
-        return () => {
-            inputAutoComplete.removeEventListener("input", handleInputOnChange);
-        };
-    }, []);
+            setState("not-empty");
+            setResults(matches);
+            setText(text)
+        }
+    }
 
     return (
         <>
-        <Wrapper className="selected-list__autocomplete">
-            <ResultListItem resultItemsArrayState = { resultItemsArrayState } />
-        </Wrapper>
+            <InputAutoComplete
+                id="input-autocomplete"
+                type="text" placeholder="Choose your technology"
+                onChange={e => onChangeHandler(e.target.value)}
+                value={text}>
+            </InputAutoComplete>
+            <Wrapper
+                className={`${state}`}>
+                <WrapperLi className="result-item__autocomplete">{text}</WrapperLi>
+                {results.map(resultItem =>
+                    (<WrapperLi
+                        className="result-item__autocomplete"
+                        key={resultItem}>
+                        {resultItem}
+                    </WrapperLi>))}
+            </Wrapper>
         </>
     );
 };

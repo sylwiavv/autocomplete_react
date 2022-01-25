@@ -4,11 +4,10 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow-x: scroll;
-  margin: 0;
-  padding: 32px;
+  padding: 16px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background-color: ${({ theme }) => theme.colors.lightGrey};
+  max-width: 400px;
 `;

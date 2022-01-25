@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../autocomplete_js/autocomplete_js" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../react_roman/study-buddy" vcs="Git" />
   </component>
 </project>

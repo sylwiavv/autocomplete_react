@@ -8,9 +8,7 @@ const Root = () => {
   return (
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-            <MainTemplate>
-                <h1>Hello</h1>
-            </MainTemplate>
+            <MainTemplate />
         </ThemeProvider>
   );
 };
