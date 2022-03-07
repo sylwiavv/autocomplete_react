@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const WrapperLi = styled.li`
   padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
 
-  &:first-child {
-    font-weight: ${({ theme }) => theme.fontWeight.bolder};
-    background-color: ${({ theme }) => theme.colors.grey};
-  }
+  // &:first-child {
+  //   font-weight: ${({ theme }) => theme.fontWeight.bolder};
+  //   background-color: ${({ theme }) => theme.colors.grey};
+  // }
 
   &:hover {
     cursor: pointer;
