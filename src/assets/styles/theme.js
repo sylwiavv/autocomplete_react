@@ -21,4 +21,9 @@ export const theme = {
     m: '12px',
     s: '11px',
   },
+  fontWeight: {
+    bold: '500',
+    semibold: '600',
+    bolder: '700'
+  }
 };
