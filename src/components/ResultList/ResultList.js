@@ -8,7 +8,8 @@ const ResultList = () => {
     const [text, setText] = useState('');
     const [results, setResults] = useState([]);
     const [state, setState] = useState("");
-    const toggleAccordion = () => {
+
+        const toggleAccordion = () => {
         setState(state === "" ? "not-empty" : "");
     }
 
@@ -25,10 +26,16 @@ const ResultList = () => {
                     return tech.match(regex);
                 })
             }
+            matches.unshift(text);
             setState("not-empty");
             setResults(matches);
             setText(text)
         }
+    }
+
+    const addElementOnClick = (e) => {
+        const clickedElement = e.target.dataset.value.trim();
+        console.log(clickedElement)
     }
 
     return (
@@ -39,13 +46,15 @@ const ResultList = () => {
                 onChange={e => onChangeHandler(e.target.value)}
                 value={text}>
             </InputAutoComplete>
-            <Wrapper
-                className={`${state}`}>
-                <WrapperLi className="result-item__autocomplete">{text}</WrapperLi>
+            <Wrapper className={`${state}`}>
                 {results.map(resultItem =>
                     (<WrapperLi
+                        onClick={addElementOnClick}
                         className="result-item__autocomplete"
-                        key={resultItem}>
+                        key={resultItem}
+                        data-value={resultItem}
+                        data={resultItem}
+                    >
                         {resultItem}
                     </WrapperLi>))}
             </Wrapper>
