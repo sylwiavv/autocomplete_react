@@ -3,13 +3,17 @@ import { Wrapper } from "components/ResultList/ResultList.styles";
 import { WrapperLi } from "../ResultListItem/ResultListItem.styles";
 import { technologies } from "data/technologies";
 import { InputAutoComplete } from "../InputAutoComplete/InputAutoComplete.styles";
+import SelectedList from "../SelectedList/SelectedList";
 
 const ResultList = () => {
-    const [text, setText] = useState('');
+    const [text, setText] = useState("");
     const [results, setResults] = useState([]);
     const [state, setState] = useState("");
 
-        const toggleAccordion = () => {
+    const [selected, setSelected] = useState([]);
+
+
+    const toggleAccordion = () => {
         setState(state === "" ? "not-empty" : "");
     }
 
@@ -35,7 +39,12 @@ const ResultList = () => {
 
     const addElementOnClick = (e) => {
         const clickedElement = e.target.dataset.value.trim();
-        console.log(clickedElement)
+        const selectedArray = [...selected];
+        const foundItems = selectedArray.filter(selectedElement => selectedElement === clickedElement);
+        if (foundItems.length === 0) {
+            selectedArray.push(clickedElement);
+        }
+        setSelected(selectedArray);
     }
 
     return (
@@ -57,7 +66,8 @@ const ResultList = () => {
                     >
                         {resultItem}
                     </WrapperLi>))}
-            </Wrapper>
+            </Wrapper >
+            <SelectedList selected={selected} />
         </>
     );
 };
