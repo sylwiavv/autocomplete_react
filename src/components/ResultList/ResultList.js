@@ -12,6 +12,9 @@ const ResultList = () => {
 
     const [selected, setSelected] = useState([]);
 
+    const updateSelectedItemsList = (selectedItem) => {
+        setSelected(selectedItem);
+    }
 
     const toggleAccordion = () => {
         setState(state === "" ? "not-empty" : "");
@@ -67,7 +70,11 @@ const ResultList = () => {
                         {resultItem}
                     </WrapperLi>))}
             </Wrapper >
-            <SelectedList selected={selected} />
+            <SelectedList
+                selected={selected}
+                setSelected={setSelected}
+                updateSelectedItemsList={setSelected}
+            />
         </>
     );
 };
