@@ -4,12 +4,12 @@ import { WrapperLi } from "../ResultListItem/ResultListItem.styles";
 import { technologies } from "data/technologies";
 import { InputAutoComplete } from "../InputAutoComplete/InputAutoComplete.styles";
 import SelectedList from "../SelectedList/SelectedList";
+import {ARROW_DOWN, ARROW_UP, ENTER, ESC, BACKSPACE} from "../../utils/consts";
 
 const ResultList = () => {
     const [text, setText] = useState("");
     const [results, setResults] = useState([]);
     const [state, setState] = useState("");
-
     const [selected, setSelected] = useState([]);
 
     const updateSelectedItemsList = (selectedItem) => {

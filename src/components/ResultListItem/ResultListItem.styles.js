@@ -10,6 +10,11 @@ export const WrapperLi = styled.li`
   //   background-color: ${({ theme }) => theme.colors.grey};
   // }
 
+  background: ${({ theme, addClass }) => {
+    if ( addClass ) return theme.colors.success;
+    if ( !addClass ) return theme.colors.error;
+  }};
+
   &:hover {
     cursor: pointer;
     font-weight: 600;
