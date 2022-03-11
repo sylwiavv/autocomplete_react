@@ -11,6 +11,9 @@ const ResultList = () => {
     const [results, setResults] = useState([]);
     const [state, setState] = useState("");
     const [selected, setSelected] = useState([]);
+    let [indexItem, setIndexItem] = useState(0);
+
+    const [activeSuggestion, setActiveSuggestion] = useState("");
 
     const updateSelectedItemsList = (selectedItem) => {
         setSelected(selectedItem);
@@ -50,23 +53,66 @@ const ResultList = () => {
         setSelected(selectedArray);
     }
 
+    const handleKeyDown = (e) => {
+        let previousElement;
+        let actualElement;
+
+        const liElementsLength = results.length;
+
+        if (e.keyCode === ARROW_DOWN && liElementsLength > 0) {
+            indexItem++;
+            setIndexItem(indexItem);
+
+            previousElement = results[indexItem - 2];
+            actualElement = results[indexItem - 1];
+
+            console.log(previousElement)
+            console.log(actualElement)
+            console.log(e.target.value)
+
+        }
+
+        if (e.keyCode === ESC) {
+            console.log('You pressed the escape key!')
+        }
+        if (e.keyCode === ARROW_UP) {
+            console.log('Up')
+        }
+
+        if (e.keyCode === ENTER) {
+            console.log('Enter')
+
+        }
+        if (e.keyCode === BACKSPACE) {
+            console.log('Back')
+        }
+    }
+
+    // useEffect(() => {
+    //     handleKeyDown();
+    //
+    //     return () => {
+    //         handleKeyDown();
+    //     };
+    // }, [handleKeyDown])
+
     return (
         <>
             <InputAutoComplete
                 id="input-autocomplete"
                 type="text" placeholder="Choose your technology"
                 onChange={e => onChangeHandler(e.target.value)}
-                value={text}>
+                value={text}
+                onKeyDown={handleKeyDown}>
             </InputAutoComplete>
-            <Wrapper className={`${state}`}>
+            <Wrapper className={`${state}`} >
                 {results.map(resultItem =>
                     (<WrapperLi
                         onClick={addElementOnClick}
-                        className="result-item__autocomplete"
+                        // className={index === suggestionIndex ? "active" : ""}
                         key={resultItem}
                         data-value={resultItem}
-                        data={resultItem}
-                    >
+                        data={resultItem}>
                         {resultItem}
                     </WrapperLi>))}
             </Wrapper >
