@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Wrapper } from "components/ResultList/ResultList.styles";
-import { WrapperLi } from "../ResultListItem/ResultListItem.styles";
-import { technologies } from "data/technologies";
-import { InputAutoComplete } from "../InputAutoComplete/InputAutoComplete.styles";
+import React, {useState, useEffect} from 'react';
+import {Wrapper} from "components/ResultList/ResultList.styles";
+import {WrapperLi} from "../ResultListItem/ResultListItem.styles";
+import {technologies} from "data/technologies";
+import {InputAutoComplete} from "../InputAutoComplete/InputAutoComplete.styles";
 import SelectedList from "../SelectedList/SelectedList";
 import {ARROW_DOWN, ARROW_UP, ENTER, ESC, BACKSPACE} from "../../utils/consts";
 
@@ -11,7 +11,8 @@ const ResultList = () => {
     const [results, setResults] = useState([]);
     const [state, setState] = useState("");
     const [selected, setSelected] = useState([]);
-    let [indexItem, setIndexItem] = useState(0);
+
+    let [activeSuggestion, setActiveSuggestion] = useState(0);
 
     const updateSelectedItemsList = (selectedItem) => {
         setSelected(selectedItem);
@@ -51,75 +52,38 @@ const ResultList = () => {
         setSelected(selectedArray);
     }
 
-    let [activeSuggestion, setActiveSuggestion] = useState(0);
 
     const handleKeyDown = (e) => {
-        let previousElement;
-        let actualElement;
-
-        const liElementsLength = results.length;
-
-        if (e.keyCode === ARROW_DOWN && liElementsLength > 0) {
-            activeSuggestion++;
-            setActiveSuggestion(activeSuggestion)
-            previousElement = results[activeSuggestion - 2];
-            actualElement = results[activeSuggestion - 1];
-
-            setText(actualElement);
-
-            const lastItemIndex = (results.indexOf(actualElement) + 1);
-
-            if (lastItemIndex === liElementsLength) {
-                setActiveSuggestion(0);
-            }
-        }
-
-        if (e.keyCode === ARROW_UP && liElementsLength > 0) {
-            activeSuggestion--;
-            setActiveSuggestion(activeSuggestion)
-            previousElement = results[activeSuggestion];
-            actualElement = results[activeSuggestion - 1];
-
-            setText(actualElement);
-
-            // const lastItemIndex = (results.indexOf(actualElement - 1));
-            // console.log(lastItemIndex)
-            console.log("actual element" + results.indexOf(actualElement))
-            if (actualElement === undefined) {
-                        setActiveSuggestion(liElementsLength - 1 )
-                console.log('tutaj jestem')
-
-            }
-
-            //
-            // if (lastItemIndex === 0) {
-            //     console.log('last item')
-            //     // console.log(lastItemIndex, liElementsLength)
-            //     //
-            //     if (lastItemIndex === -1) {
-            //         console.log(lastItemIndex)
-            //         setActiveSuggestion(liElementsLength - 1 )
-            //     }
-            // }
-        }
-
-        if (e.keyCode === ESC) {
-            console.log('You pressed the escape key!')
-        }
-
+        const suggestionsLength = results.length;
 
         if (e.keyCode === ENTER) {
             selected.push(text);
             setState('');
             setResults([]);
             setText('');
-        }
-        if (e.keyCode === BACKSPACE) {
-            console.log('Back')
-        }
+        } else if (e.keyCode === ARROW_UP) {
+            let actualElement = activeSuggestion - 1;
+            setActiveSuggestion(activeSuggestion - 1);
 
+            if (results[actualElement] === undefined) {
+                setActiveSuggestion(suggestionsLength - 1);
+            }
+        } else if (e.keyCode === ARROW_DOWN) {
+            let actualElement = activeSuggestion + 1;
+            setActiveSuggestion(actualElement);
+
+            if ((suggestionsLength - 2) <= activeSuggestion) {
+                activeSuggestion = suggestionsLength - 1;
+                setActiveSuggestion(activeSuggestion);
+            }
+
+            if (results[actualElement] === undefined) {
+                setActiveSuggestion(0);
+            }
+        }
     }
 
+    //
     // useEffect(() => {
     //     handleKeyDown();
     //
@@ -138,7 +102,7 @@ const ResultList = () => {
                 value={text}
                 onKeyDown={handleKeyDown}>
             </InputAutoComplete>
-            <Wrapper className={`${state}`} >
+            <Wrapper className={`${state}`}>
                 {results.map((resultItem, index) =>
                     (<WrapperLi
                         onClick={addElementOnClick}
@@ -150,7 +114,7 @@ const ResultList = () => {
                     >
                         {resultItem}
                     </WrapperLi>))}
-            </Wrapper >
+            </Wrapper>
             <SelectedList
                 selected={selected}
                 setSelected={setSelected}
