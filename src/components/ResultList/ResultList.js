@@ -13,8 +13,6 @@ const ResultList = () => {
     const [selected, setSelected] = useState([]);
     let [indexItem, setIndexItem] = useState(0);
 
-    const [activeSuggestion, setActiveSuggestion] = useState("");
-
     const updateSelectedItemsList = (selectedItem) => {
         setSelected(selectedItem);
     }
@@ -53,6 +51,8 @@ const ResultList = () => {
         setSelected(selectedArray);
     }
 
+    let [activeSuggestion, setActiveSuggestion] = useState(0);
+
     const handleKeyDown = (e) => {
         let previousElement;
         let actualElement;
@@ -60,32 +60,64 @@ const ResultList = () => {
         const liElementsLength = results.length;
 
         if (e.keyCode === ARROW_DOWN && liElementsLength > 0) {
-            indexItem++;
-            setIndexItem(indexItem);
+            activeSuggestion++;
+            setActiveSuggestion(activeSuggestion)
+            previousElement = results[activeSuggestion - 2];
+            actualElement = results[activeSuggestion - 1];
 
-            previousElement = results[indexItem - 2];
-            actualElement = results[indexItem - 1];
+            setText(actualElement);
 
-            console.log(previousElement)
-            console.log(actualElement)
-            console.log(e.target.value)
+            const lastItemIndex = (results.indexOf(actualElement) + 1);
 
+            if (lastItemIndex === liElementsLength) {
+                setActiveSuggestion(0);
+            }
+        }
+
+        if (e.keyCode === ARROW_UP && liElementsLength > 0) {
+            activeSuggestion--;
+            setActiveSuggestion(activeSuggestion)
+            previousElement = results[activeSuggestion];
+            actualElement = results[activeSuggestion - 1];
+
+            setText(actualElement);
+
+            // const lastItemIndex = (results.indexOf(actualElement - 1));
+            // console.log(lastItemIndex)
+            console.log("actual element" + results.indexOf(actualElement))
+            if (actualElement === undefined) {
+                        setActiveSuggestion(liElementsLength - 1 )
+                console.log('tutaj jestem')
+
+            }
+
+            //
+            // if (lastItemIndex === 0) {
+            //     console.log('last item')
+            //     // console.log(lastItemIndex, liElementsLength)
+            //     //
+            //     if (lastItemIndex === -1) {
+            //         console.log(lastItemIndex)
+            //         setActiveSuggestion(liElementsLength - 1 )
+            //     }
+            // }
         }
 
         if (e.keyCode === ESC) {
             console.log('You pressed the escape key!')
         }
-        if (e.keyCode === ARROW_UP) {
-            console.log('Up')
-        }
+
 
         if (e.keyCode === ENTER) {
-            console.log('Enter')
-
+            selected.push(text);
+            setState('');
+            setResults([]);
+            setText('');
         }
         if (e.keyCode === BACKSPACE) {
             console.log('Back')
         }
+
     }
 
     // useEffect(() => {
@@ -95,6 +127,7 @@ const ResultList = () => {
     //         handleKeyDown();
     //     };
     // }, [handleKeyDown])
+
 
     return (
         <>
@@ -106,13 +139,15 @@ const ResultList = () => {
                 onKeyDown={handleKeyDown}>
             </InputAutoComplete>
             <Wrapper className={`${state}`} >
-                {results.map(resultItem =>
+                {results.map((resultItem, index) =>
                     (<WrapperLi
                         onClick={addElementOnClick}
                         // className={index === suggestionIndex ? "active" : ""}
                         key={resultItem}
                         data-value={resultItem}
-                        data={resultItem}>
+                        data={resultItem}
+                        className={index === activeSuggestion ? 'active' : ''}
+                    >
                         {resultItem}
                     </WrapperLi>))}
             </Wrapper >

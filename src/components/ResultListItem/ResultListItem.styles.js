@@ -10,9 +10,12 @@ export const WrapperLi = styled.li`
   //   background-color: ${({ theme }) => theme.colors.grey};
   // }
 
-  background: ${({ theme, addClass }) => {
-    if ( addClass ) return theme.colors.success;
-    if ( !addClass ) return theme.colors.error;
+  background: ${({ theme, className }) => {
+    if ( className ) return theme.colors.success;
+  }};  
+  
+  transition: ${({ className }) => {
+    if ( className ) return '.9s';
   }};
 
   &:hover {
