@@ -7,7 +7,7 @@ import SelectedList from "../SelectedList/SelectedList";
 import {ARROW_DOWN, ARROW_UP, ENTER, ESC, BACKSPACE} from "../../utils/consts";
 
 const ResultList = () => {
-    const [text, setText] = useState("");
+    let [text, setText] = useState("");
     const [results, setResults] = useState([]);
     const [state, setState] = useState("");
     const [selected, setSelected] = useState([]);
@@ -52,12 +52,13 @@ const ResultList = () => {
         setSelected(selectedArray);
     }
 
-
     const handleKeyDown = (e) => {
         const suggestionsLength = results.length;
 
         if (e.keyCode === ENTER) {
-            selected.push(text);
+            if (text !== "") {
+                selected.push(text);
+            }
             setState('');
             setResults([]);
             setText('');
@@ -67,7 +68,12 @@ const ResultList = () => {
 
             if (results[actualElement] === undefined) {
                 setActiveSuggestion(suggestionsLength - 1);
+                setText(text);
             }
+
+            text = results[actualElement]
+            setText(text);
+
         } else if (e.keyCode === ARROW_DOWN) {
             let actualElement = activeSuggestion + 1;
             setActiveSuggestion(actualElement);
@@ -80,10 +86,12 @@ const ResultList = () => {
             if (results[actualElement] === undefined) {
                 setActiveSuggestion(0);
             }
+
+            text = results[actualElement];
+            setText(text);
         }
     }
 
-    //
     // useEffect(() => {
     //     handleKeyDown();
     //
@@ -92,22 +100,20 @@ const ResultList = () => {
     //     };
     // }, [handleKeyDown])
 
-
     return (
         <>
             <InputAutoComplete
                 id="input-autocomplete"
                 type="text" placeholder="Choose your technology"
                 onChange={e => onChangeHandler(e.target.value)}
-                value={text}
+                value={text === undefined ?  results[activeSuggestion] : text }
                 onKeyDown={handleKeyDown}>
             </InputAutoComplete>
             <Wrapper className={`${state}`}>
                 {results.map((resultItem, index) =>
                     (<WrapperLi
                         onClick={addElementOnClick}
-                        // className={index === suggestionIndex ? "active" : ""}
-                        key={resultItem}
+                        key={index}
                         data-value={resultItem}
                         data={resultItem}
                         className={index === activeSuggestion ? 'active' : ''}

@@ -15,7 +15,7 @@ export const WrapperLi = styled.li`
   }};  
   
   transition: ${({ className }) => {
-    if ( className ) return '.9s';
+    if ( className ) return '.4s';
   }};
 
   &:hover {
