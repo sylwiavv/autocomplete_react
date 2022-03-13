@@ -7,6 +7,7 @@ import SelectedList from "../SelectedList/SelectedList";
 import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER} from "../../utils/consts";
 import {escapeRegExp} from "../../helpers/helpers";
 
+
 const ResultList = () => {
     let [text, setText] = useState("");
     let [results, setResults] = useState([]);
@@ -59,9 +60,7 @@ const ResultList = () => {
 
     const handleKeyDown = (e) => {
         const suggestionsLength = results.length;
-
         if (text !== "") {
-
             if (e.keyCode === ENTER) {
                 let currentInputValue = text.trim();
                 if (currentInputValue !== "") {
@@ -73,6 +72,7 @@ const ResultList = () => {
                 setState('');
                 setResults([]);
                 setText('');
+                setActiveSuggestion(0);
 
             } else if (e.keyCode === ARROW_UP) {
                 let actualElement = activeSuggestion - 1;
