@@ -13,12 +13,11 @@ const SelectedList = ({selected, setSelected, updateSelectedItemsList}) => {
 
     return (
         <Wrapper>
-            {selected.map(selectedItem =>
+            {selected.map((selectedItem, index) =>
                 (<WrapperLi
                     className="selected-item__autocomplete"
-                    key={selectedItem}
-                    data-value={selectedItem}
-                >
+                    key={index}
+                    data-value={selectedItem}>
                     {selectedItem}
                     <DeleteItem onClick={() => handleRemove(selectedItem) } />
                 </WrapperLi>))}

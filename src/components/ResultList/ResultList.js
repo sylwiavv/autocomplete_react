@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Wrapper} from "components/ResultList/ResultList.styles";
 import {WrapperLi} from "../ResultListItem/ResultListItem.styles";
 import {technologies} from "data/technologies";
 import {InputAutoComplete} from "../InputAutoComplete/InputAutoComplete.styles";
 import SelectedList from "../SelectedList/SelectedList";
-import {ARROW_DOWN, ARROW_UP, ENTER, ESC, BACKSPACE} from "../../utils/consts";
+import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER} from "../../utils/consts";
+import {escapeRegExp} from "../../helpers/helpers";
 
 const ResultList = () => {
     let [text, setText] = useState("");
-    const [results, setResults] = useState([]);
+    let [results, setResults] = useState([]);
     const [state, setState] = useState("");
     const [selected, setSelected] = useState([]);
 
@@ -24,21 +25,25 @@ const ResultList = () => {
 
     const onChangeHandler = (text) => {
         if (!text) {
-            setText('');
+            setText("");
             setResults([]);
             toggleAccordion();
         } else {
+            setText(text);
             let matches = [""];
-            if (matches.length > 0) {
-                matches = technologies.filter(tech => {
-                    const regex = new RegExp(`${text}`, "gi");
-                    return tech.match(regex);
-                })
+            if (text.trim() !== "") {
+                if (matches.length > 0) {
+                    matches = technologies.filter(tech => {
+                        // const regex = new RegExp(`${text}`, "gi");
+                        const techItems = tech.toLowerCase().replace(/\s/g, "");
+                        return techItems.match(escapeRegExp(text.toLowerCase().replace(/\s/g, '')));
+                    })
+                }
+                matches.unshift(text);
+                setState("not-empty");
+                setResults(matches);
+                setText(text);
             }
-            matches.unshift(text);
-            setState("not-empty");
-            setResults(matches);
-            setText(text)
         }
     }
 
@@ -55,40 +60,54 @@ const ResultList = () => {
     const handleKeyDown = (e) => {
         const suggestionsLength = results.length;
 
-        if (e.keyCode === ENTER) {
-            if (text !== "") {
-                selected.push(text);
-            }
-            setState('');
-            setResults([]);
-            setText('');
-        } else if (e.keyCode === ARROW_UP) {
-            let actualElement = activeSuggestion - 1;
-            setActiveSuggestion(activeSuggestion - 1);
+        if (text !== "") {
 
-            if (results[actualElement] === undefined) {
-                setActiveSuggestion(suggestionsLength - 1);
+            if (e.keyCode === ENTER) {
+                let currentInputValue = text.trim();
+                if (currentInputValue !== "") {
+                    const foundItems = selected.filter(selectedElement => selectedElement === currentInputValue);
+                    if (foundItems.length === 0) {
+                        selected.push(currentInputValue);
+                    }
+                }
+                setState('');
+                setResults([]);
+                setText('');
+
+            } else if (e.keyCode === ARROW_UP) {
+                let actualElement = activeSuggestion - 1;
+                setActiveSuggestion(activeSuggestion - 1);
+
+                if (results[actualElement] === undefined) {
+                    setActiveSuggestion(suggestionsLength - 1);
+                    setText(text);
+                }
+
+                text = results[actualElement]
                 setText(text);
+
+            } else if (e.keyCode === ARROW_DOWN) {
+                let actualElement = activeSuggestion + 1;
+                setActiveSuggestion(actualElement);
+
+                if ((suggestionsLength - 2) <= activeSuggestion) {
+                    activeSuggestion = suggestionsLength - 1;
+                    setActiveSuggestion(activeSuggestion);
+                }
+
+                if (results[actualElement] === undefined) {
+                    setActiveSuggestion(0);
+                }
+
+                text = results[actualElement];
+                setText(text);
+
+            } else if (e.keyCode === BACKSPACE) {
+                if (text === "") {
+                    setResults([]);
+                    setSelected(0);
+                }
             }
-
-            text = results[actualElement]
-            setText(text);
-
-        } else if (e.keyCode === ARROW_DOWN) {
-            let actualElement = activeSuggestion + 1;
-            setActiveSuggestion(actualElement);
-
-            if ((suggestionsLength - 2) <= activeSuggestion) {
-                activeSuggestion = suggestionsLength - 1;
-                setActiveSuggestion(activeSuggestion);
-            }
-
-            if (results[actualElement] === undefined) {
-                setActiveSuggestion(0);
-            }
-
-            text = results[actualElement];
-            setText(text);
         }
     }
 
@@ -106,7 +125,7 @@ const ResultList = () => {
                 id="input-autocomplete"
                 type="text" placeholder="Choose your technology"
                 onChange={e => onChangeHandler(e.target.value)}
-                value={text === undefined ?  results[activeSuggestion] : text }
+                value={text === undefined ? results[activeSuggestion] : text}
                 onKeyDown={handleKeyDown}>
             </InputAutoComplete>
             <Wrapper className={`${state}`}>
