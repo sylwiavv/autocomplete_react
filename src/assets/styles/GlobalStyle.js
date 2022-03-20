@@ -26,8 +26,11 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  
+
+  input[type='text'],
+  input[type='number'],
   input {
+    font-size: 16px;
     height: 48px;
     border: 0;
   }
