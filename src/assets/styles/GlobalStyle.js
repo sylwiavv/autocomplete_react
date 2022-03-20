@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors.fontColor};
     padding: ${({ theme }) => theme.indents.m};
     margin: 0;
-    height: 100vh;
   }
   
   html,
