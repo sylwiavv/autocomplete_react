@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
   input[type='text'],
   input[type='number'],
   input {
-    font-size: 16px;
+    font-size: 12px;
     height: 48px;
     border: 0;
   }
