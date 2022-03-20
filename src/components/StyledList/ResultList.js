@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {Wrapper} from "components/ResultList/ResultList.styles";
-import {WrapperLi} from "../ResultListItem/ResultListItem.styles";
+import {StyledList} from "components/StyledList/StyledList.styles";
+import {StyledLiItem} from "../StyledLiItem/StyledLiItem.styles";
 import {technologies} from "data/technologies";
-import {InputAutoComplete} from "../InputAutoComplete/InputAutoComplete.styles";
+import { InputAutoComplete } from "../InputAutoComplete/InputAutoComplete.styles";
 import SelectedList from "../SelectedList/SelectedList";
-import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER} from "../../utils/consts";
-import {escapeRegExp} from "../../helpers/helpers";
-
+import { ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER } from "../../utils/consts";
+import { escapeRegExp } from "../../helpers/helpers";
+import { MainWrapper } from "../MainWrapper/MainWrapper.styles";
 
 const ResultList = () => {
     let [text, setText] = useState("");
@@ -35,7 +35,6 @@ const ResultList = () => {
             if (text.trim() !== "") {
                 if (matches.length > 0) {
                     matches = technologies.filter(tech => {
-                        // const regex = new RegExp(`${text}`, "gi");
                         const techItems = tech.toLowerCase().replace(/\s/g, "");
                         return techItems.match(escapeRegExp(text.toLowerCase().replace(/\s/g, '')));
                     })
@@ -54,6 +53,9 @@ const ResultList = () => {
         const foundItems = selectedArray.filter(selectedElement => selectedElement === clickedElement);
         if (foundItems.length === 0) {
             selectedArray.push(clickedElement);
+            setResults([]);
+            setText("");
+            setState("");
         }
         setSelected(selectedArray);
     }
@@ -119,33 +121,41 @@ const ResultList = () => {
     //     };
     // }, [handleKeyDown])
 
+    // {selected.length > 0 ? (
+
+
     return (
-        <>
-            <InputAutoComplete
-                id="input-autocomplete"
-                type="text" placeholder="Choose your technology"
-                onChange={e => onChangeHandler(e.target.value)}
-                value={text === undefined ? results[activeSuggestion] : text}
-                onKeyDown={handleKeyDown}>
-            </InputAutoComplete>
-            <Wrapper className={`${state}`}>
-                {results.map((resultItem, index) =>
-                    (<WrapperLi
-                        onClick={addElementOnClick}
-                        key={index}
-                        data-value={resultItem}
-                        data={resultItem}
-                        className={index === activeSuggestion ? 'active' : ''}
-                    >
-                        {resultItem}
-                    </WrapperLi>))}
-            </Wrapper>
+        <MainWrapper className="autocomplete__wrapper">
             <SelectedList
                 selected={selected}
                 setSelected={setSelected}
                 updateSelectedItemsList={setSelected}
             />
-        </>
+            <MainWrapper className="autocomplete__input-wrapper">
+                <InputAutoComplete
+                    id="input-autocomplete"
+                    type="text" placeholder="Choose your technology"
+                    onChange={e => onChangeHandler(e.target.value)}
+                    value={text === undefined ? results[activeSuggestion] : text}
+                    onKeyDown={handleKeyDown}>
+                </InputAutoComplete>
+                { results.length > 0 &&
+                    <StyledList className={`${state} autocomplete__result-list`}>
+                        {results.map((resultItem, index) =>
+                            (<StyledLiItem
+                                onClick={addElementOnClick}
+                                key={index}
+                                data-value={resultItem}
+                                data={resultItem}
+                                className={`${index === activeSuggestion ? 'active' : ''}
+                            autocomplete__result-item `}
+                                onMouseEnter={() => setActiveSuggestion(index)}>
+                                {resultItem}
+                            </StyledLiItem>))}
+                    </StyledList>
+                }
+            </MainWrapper>
+        </MainWrapper>
     );
 };
 

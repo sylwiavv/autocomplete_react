@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {DeleteButton} from "./DeleteItems.styles";
-import {ReactComponent as DeleteIcon} from 'assets/icons/icon__close.svg';
+import React from 'react';
+import {DeleteButton, StyledDeleteIcon as DeleteIcon} from "./DeleteItems.styles";
 
 const DeleteItem = (props) => {
     return (
         // Zastanowić się czy delete button nie zrobić jakimś globalnym divem
         <DeleteButton {...props}>
-            <DeleteIcon/>
+            <DeleteIcon />
         </DeleteButton>
     );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import { Wrapper } from "./MainTemplate.styles";
+import { MainWrapper } from "./MainWrapper.styles";
 import { Title } from "../Title/Title.styles";
-import ResultList from "../ResultList/ResultList";
+import ResultList from "../StyledList/ResultList";
 
 const MainTemplate = () => {
     return (
-        <Wrapper>
+        <MainWrapper>
             <Title>Autocomplete React</Title>
             <ResultList />
-        </Wrapper>
+        </MainWrapper>
     );
 };
 

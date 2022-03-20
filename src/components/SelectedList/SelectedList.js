@@ -1,6 +1,6 @@
 import React from 'react';
-import {Wrapper} from "components/ResultList/ResultList.styles";
-import {WrapperLi} from "../ResultListItem/ResultListItem.styles";
+import { StyledList } from "../StyledList/StyledList.styles";
+import { StyledLiItem } from "../StyledLiItem/StyledLiItem.styles";
 import DeleteItem from "../DeleteItem/DeleteItem";
 
 const SelectedList = ({selected, setSelected, updateSelectedItemsList}) => {
@@ -12,16 +12,16 @@ const SelectedList = ({selected, setSelected, updateSelectedItemsList}) => {
     };
 
     return (
-        <Wrapper>
+        <StyledList className={`autocomplete__selected-list`}>
             {selected.map((selectedItem, index) =>
-                (<WrapperLi
-                    className="selected-item__autocomplete"
+                (<StyledLiItem
+                    className="autocomplete__selected-item"
                     key={index}
                     data-value={selectedItem}>
                     {selectedItem}
                     <DeleteItem onClick={() => handleRemove(selectedItem) } />
-                </WrapperLi>))}
-        </Wrapper>
+                </StyledLiItem>))}
+        </StyledList>
     );
 }
 
