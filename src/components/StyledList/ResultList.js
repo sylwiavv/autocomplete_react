@@ -8,6 +8,8 @@ import { ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER } from "../../utils/consts";
 import { escapeRegExp } from "../../helpers/helpers";
 import { MainWrapper } from "../MainWrapper/MainWrapper.styles";
 
+const data = technologies;
+
 const ResultList = () => {
     let [text, setText] = useState("");
     let [results, setResults] = useState([]);
@@ -34,7 +36,7 @@ const ResultList = () => {
             let matches = [""];
             if (text.trim() !== "") {
                 if (matches.length > 0) {
-                    matches = technologies.filter(tech => {
+                    matches = data.filter(tech => {
                         const techItems = tech.toLowerCase().replace(/\s/g, "");
                         return techItems.match(escapeRegExp(text.toLowerCase().replace(/\s/g, '')));
                     })
