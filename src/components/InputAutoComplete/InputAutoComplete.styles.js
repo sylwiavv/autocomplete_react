@@ -1,18 +1,22 @@
 import styled from 'styled-components';
 
 export const InputAutoComplete = styled.input`
-  border: 2px solid ${({ theme }) => theme.colors.black};
-  border-radius: 4px;
-  background-color: ${({ theme }) => theme.colors.lightGrey};
-  outline: none;
-  padding: 4px 8px;
-  height: 48px;
-  width: 100%;
-  transition: border-color .4s;
+  display: flex;
+  align-self: flex-start;
+  text-align: start;
+  flex: 1;
+  padding: ${({ theme }) => theme.indents.xs} ${({ theme }) => theme.indents.s};
+  height: ${({ theme }) => theme.height.input};
 
+  border-radius: ${({ theme }) => theme.borderRadius.s};
+  background-color: ${({ theme }) => theme.colors.inputBackgroundColor};
+  
+  min-width: max-content;
+  
   &:focus,
   &:hover {
-    border-color: ${({ theme }) => theme.colors.darkGrey};
+    border: none;
+    outline: none;
   }
 
   &::placeholder {

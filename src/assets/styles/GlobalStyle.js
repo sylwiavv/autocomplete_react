@@ -3,9 +3,13 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${({ theme }) => theme.colors.white};
-    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.backgroundColor};
+    color: ${({ theme }) => theme.colors.fontColor};
+    padding: ${({ theme }) => theme.indents.m};
+    margin: 0;
+    height: 100vh;
   }
+  
   html,
   *, *::after, *::before {
     box-sizing: border-box;
@@ -25,7 +29,6 @@ export const GlobalStyle = createGlobalStyle`
   
   input {
     height: 48px;
-    width: 400px;
-    padding: 0 8px;
+    border: 0;
   }
 `;
