@@ -5,9 +5,9 @@ export const StyledLiItem = styled.li`
   align-items: center;
   justify-content: space-between;
   padding: ${({theme}) => theme.indents.s};
-  // color: ${({ theme, className }) => { if ( className ) return theme.colors.black;}};
   font-size: ${({theme}) => theme.fontSize.m};
   border-radius: ${({theme}) => theme.borderRadius.xs};
+  white-space: pre-wrap;
 
   &.autocomplete {
     &__selected-item {

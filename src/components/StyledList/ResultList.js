@@ -146,9 +146,7 @@ const ResultList = () => {
                                 onClick={addElementOnClick}
                                 key={index}
                                 data-value={resultItem}
-                                data={resultItem}
-                                className={`${index === activeSuggestion ? 'active' : ''}
-                            autocomplete__result-item `}
+                                className={`${index === activeSuggestion ? 'active' : ''} autocomplete__result-item `}
                                 onMouseEnter={() => setActiveSuggestion(index)}>
                                 {resultItem}
                             </StyledLiItem>))}
