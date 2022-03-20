@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     height: 48px;
     border: 0;
+    transform-origin: left;
     transform: scale(0.75);
   }
 `;
