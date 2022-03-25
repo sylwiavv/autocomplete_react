@@ -1,16 +1,20 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'assets/styles/theme';
-import { GlobalStyle } from "assets/styles/GlobalStyle";
+import {ThemeProvider} from 'styled-components';
+import {theme} from 'assets/styles/theme';
+import {GlobalStyle} from "assets/styles/GlobalStyle";
 import MainTemplate from "../components/MainWrapper/MainTemplate";
+import {UserContextProvider} from "providers/UserContextProvider"
 
 const Root = () => {
-  return (
+    return (
         <ThemeProvider theme={theme}>
-          <GlobalStyle />
-            <MainTemplate />
+            <UserContextProvider>
+                <GlobalStyle/>
+                <MainTemplate/>
+            </UserContextProvider>
+
         </ThemeProvider>
-  );
+    );
 };
 
 export default Root;

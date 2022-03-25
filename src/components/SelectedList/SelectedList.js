@@ -1,15 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyledList } from "../StyledList/StyledList.styles";
 import { StyledLiItem } from "../StyledLiItem/StyledLiItem.styles";
 import DeleteItem from "../DeleteItem/DeleteItem";
+import {UserContext} from "../../providers/UserContextProvider";
 
-const SelectedList = ({selected, setSelected, updateSelectedItemsList}) => {
-    const handleRemove = (clickedItem) => {
-        const index = selected.indexOf(clickedItem);
-        selected.splice(index, 1);
-        setSelected(selected);
-        updateSelectedItemsList(setSelected)
-    };
+const SelectedList = () => {
+    const { selected, handleRemove } = useContext(UserContext);
 
     return (
         <StyledList className={`autocomplete__selected-list`}>
@@ -19,7 +15,7 @@ const SelectedList = ({selected, setSelected, updateSelectedItemsList}) => {
                     key={index}
                     data-value={selectedItem}>
                     {selectedItem}
-                    <DeleteItem onClick={() => handleRemove(selectedItem) } />
+                    <DeleteItem onClick={() => handleRemove(index) } />
                 </StyledLiItem>))}
         </StyledList>
     );
