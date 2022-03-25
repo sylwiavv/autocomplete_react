@@ -2,10 +2,10 @@ import React, {useContext} from 'react';
 import { StyledList } from "../StyledList/StyledList.styles";
 import { StyledLiItem } from "../StyledLiItem/StyledLiItem.styles";
 import DeleteItem from "../DeleteItem/DeleteItem";
-import {UserContext} from "../../providers/UserContextProvider";
+import { ListContext } from "../../providers/GlobalContext";
 
 const SelectedList = () => {
-    const { selected, handleRemove } = useContext(UserContext);
+    const { selected, handleRemove } = useContext(ListContext);
 
     return (
         <StyledList className={`autocomplete__selected-list`}>

@@ -4,7 +4,7 @@ import { StyledLiItem } from "../StyledLiItem/StyledLiItem.styles";
 import { InputAutoComplete } from "../InputAutoComplete/InputAutoComplete.styles";
 import SelectedList from "../SelectedList/SelectedList";
 import { MainWrapper } from "../MainWrapper/MainWrapper.styles";
-import { UserContext } from "providers/UserContextProvider"
+import { ListContext } from "providers/GlobalContext"
 
 const ResultList = () => {
     const {
@@ -16,7 +16,7 @@ const ResultList = () => {
         onChangeHandler,
         addElementOnClick,
         handleKeyDown,
-    } = useContext(UserContext);
+    } = useContext(ListContext);
 
     return (
         <MainWrapper className="autocomplete__wrapper">

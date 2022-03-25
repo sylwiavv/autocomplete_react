@@ -3,15 +3,15 @@ import {ThemeProvider} from 'styled-components';
 import {theme} from 'assets/styles/theme';
 import {GlobalStyle} from "assets/styles/GlobalStyle";
 import MainTemplate from "../components/MainWrapper/MainTemplate";
-import {UserContextProvider} from "providers/UserContextProvider"
+import {GlobalContext} from "providers/GlobalContext"
 
 const Root = () => {
     return (
         <ThemeProvider theme={theme}>
-            <UserContextProvider>
+            <GlobalContext>
                 <GlobalStyle/>
                 <MainTemplate/>
-            </UserContextProvider>
+            </GlobalContext>
 
         </ThemeProvider>
     );

@@ -1,16 +1,16 @@
 import React, { useState, createContext } from 'react';
 import { technologies as data } from 'data/technologies';
-import {escapeRegExp} from "../helpers/helpers";
-import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER} from "../utils/consts";
+import { escapeRegExp} from "../helpers/helpers";
+import { ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER } from "../utils/consts";
 
-const UserContext = createContext({
+const ListContext = createContext({
     onChangeHandler: () => {},
     addElementOnClick: () => {},
     handleKeyDown: () => {},
     handleRemove: () => {},
 });
 
-const UserContextProvider = ({ children }) => {
+const GlobalContext = ({ children }) => {
     const [state, setState] = useState("");
     let [text, setText] = useState("");
     let [results, setResults] = useState([]);
@@ -117,7 +117,7 @@ const UserContextProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{
+        <ListContext.Provider value={{
             state,
             text,
             results,
@@ -131,8 +131,8 @@ const UserContextProvider = ({ children }) => {
             handleRemove,
         }}>
             {children}
-        </UserContext.Provider>
+        </ListContext.Provider>
     );
 };
 
-export { UserContext, UserContextProvider };
+export { ListContext, GlobalContext };
