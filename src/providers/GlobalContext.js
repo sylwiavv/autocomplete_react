@@ -11,32 +11,31 @@ const ListContext = createContext({
 });
 
 const GlobalContext = ({ children }) => {
-    const [state, setState] = useState("");
-    let [text, setText] = useState("");
-    let [results, setResults] = useState([]);
-    const [selected, setSelected] = useState([]);
-
-    let [activeSuggestion, setActiveSuggestion] = useState(0);
+    const [ emptyListClass, setEmptyListClass ] = useState("");
+    let [ activeSuggestion, setActiveSuggestion ] = useState(0);
+    let [ inputText, setInputText ] = useState("");
+    const [ results, setResults ] = useState([]);
+    const [ selected, setSelected ] = useState([]);
 
     const onChangeHandler = (text) => {
         if (!text) {
-            setText("");
+            setInputText("");
             setResults([]);
             toggleAccordion();
         } else {
-            setText(text);
+            setInputText(text);
             let matches = [""];
             if (text.trim() !== "") {
                 if (matches.length > 0) {
-                    matches = data.filter(tech => {
-                        const techItems = tech.toLowerCase().replace(/\s/g, "");
-                        return techItems.match(escapeRegExp(text.toLowerCase().replace(/\s/g, '')));
+                    matches = data.filter(matchElement => {
+                        const match = matchElement.toLowerCase().replace(/\s/g, "");
+                        return match.match(escapeRegExp(text.toLowerCase().replace(/\s/g, '')));
                     })
                 }
                 matches.unshift(text);
-                setState("not-empty");
+                setEmptyListClass("not-empty");
                 setResults(matches);
-                setText(text);
+                setInputText(text);
             }
         }
     }
@@ -48,26 +47,26 @@ const GlobalContext = ({ children }) => {
         if (foundItems.length === 0) {
             selectedArray.push(clickedElement);
             setResults([]);
-            setText("");
-            setState("");
+            setInputText("");
+            setEmptyListClass("");
         }
         setSelected(selectedArray);
     }
 
     const handleKeyDown = (e) => {
         const suggestionsLength = results.length;
-        if (text !== "") {
+        if (inputText !== "") {
             if (e.keyCode === ENTER) {
-                let currentInputValue = text.trim();
+                let currentInputValue = inputText.trim();
                 if (currentInputValue !== "") {
                     const foundItems = selected.filter(selectedElement => selectedElement === currentInputValue);
                     if (foundItems.length === 0) {
                         selected.push(currentInputValue);
                     }
                 }
-                setState('');
+                setEmptyListClass('');
                 setResults([]);
-                setText('');
+                setInputText('');
                 setActiveSuggestion(0);
 
             } else if (e.keyCode === ARROW_UP) {
@@ -76,11 +75,11 @@ const GlobalContext = ({ children }) => {
 
                 if (results[actualElement] === undefined) {
                     setActiveSuggestion(suggestionsLength - 1);
-                    setText(text);
+                    setInputText(inputText);
                 }
 
-                text = results[actualElement]
-                setText(text);
+                inputText = results[actualElement]
+                setInputText(inputText);
 
             } else if (e.keyCode === ARROW_DOWN) {
                 let actualElement = activeSuggestion + 1;
@@ -95,11 +94,11 @@ const GlobalContext = ({ children }) => {
                     setActiveSuggestion(0);
                 }
 
-                text = results[actualElement];
-                setText(text);
+                inputText = results[actualElement];
+                setInputText(inputText);
 
             } else if (e.keyCode === BACKSPACE) {
-                if (text === "") {
+                if (inputText === "") {
                     setResults([]);
                     setSelected(0);
                 }
@@ -108,7 +107,7 @@ const GlobalContext = ({ children }) => {
     }
 
     const toggleAccordion = () => {
-        setState(state === "" ? "not-empty" : "");
+        setEmptyListClass(emptyListClass === "" ? "not-empty" : "");
     }
 
     const handleRemove = (index) => {
@@ -118,8 +117,8 @@ const GlobalContext = ({ children }) => {
 
     return (
         <ListContext.Provider value={{
-            state,
-            text,
+            emptyListClass,
+            inputText,
             results,
             selected,
             activeSuggestion, setActiveSuggestion,

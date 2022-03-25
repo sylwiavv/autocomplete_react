@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InputAutoComplete = styled.input`
+export const Input = styled.input`
   display: flex;
   align-self: flex-start;
   text-align: start;

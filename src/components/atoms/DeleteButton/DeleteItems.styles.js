@@ -11,7 +11,7 @@ export const StyledDeleteIcon = styled(DeleteIcon)`
   }
 `;
 
-export const DeleteButton = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
   margin-left: ${({ theme }) => theme.indents.s};
 `;
