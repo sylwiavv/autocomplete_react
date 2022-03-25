@@ -13,7 +13,7 @@ export const StyledLiItem = styled.li`
     &__selected-item {
       background-color: ${({ theme }) => theme.colors.selectedListItemBackgroundColor};
       margin: 0
-              ${({ theme }) => theme.indents.xs}
+              0
               ${({ theme }) => theme.indents.s}
               ${({ theme }) => theme.indents.s};
 

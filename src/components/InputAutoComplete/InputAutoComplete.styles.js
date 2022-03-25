@@ -5,7 +5,7 @@ export const InputAutoComplete = styled.input`
   align-self: flex-start;
   text-align: start;
   flex: 1;
-  padding: ${({ theme }) => theme.indents.xs} ${({ theme }) => theme.indents.s};
+  padding: ${({ theme }) => theme.indents.xs} ${({ theme }) => theme.indents.m};
   height: ${({ theme }) => theme.height.input};
 
   border-radius: ${({ theme }) => theme.borderRadius.s};
