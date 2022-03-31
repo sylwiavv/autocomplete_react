@@ -3,13 +3,22 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${({ theme }) => theme.colors.backgroundColor};
-    color: ${({ theme }) => theme.colors.fontColor};
-    padding: ${({ theme }) => theme.indents.m};
     margin: 0;
     overflow: hidden;
+
+    transition: background 0.2s ease-in, color 0.2s ease-in;
+    padding: ${({theme}) => theme.indents.m};
+
+    color: ${props => props.theme.fontColor};
+    background-color: ${props => props.theme.backgroundColor};
   }
-  
+
+  #root,
+  body,
+  html {
+    height: 100%;
+  }
+
   html,
   *, *::after, *::before {
     box-sizing: border-box;
@@ -18,9 +27,9 @@ export const GlobalStyle = createGlobalStyle`
   body,
   a, button,
   * {
-    font-family: 'Montserrat', sans-serif;  
+    font-family: 'Montserrat', sans-serif;
   }
-  
+
   ul, ol {
     list-style: none;
     margin: 0;

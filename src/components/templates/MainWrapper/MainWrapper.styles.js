@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const MainWrapper = styled.div`
-  margin: auto;
+  background: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
   max-width: 560px;
+  margin: auto;
 
   &.autocomplete {
     &__input-wrapper {
@@ -18,7 +20,7 @@ export const MainWrapper = styled.div`
       flex-wrap: wrap;
       align-items: center;
       background-color: ${({ theme }) => theme.colors.inputBackgroundColor};
-      border: 1px solid ${({ theme }) => theme.colors.borderColor};
+      border: 1px solid ${props => props.theme.borderColor};
       border-radius: ${({ theme }) => theme.borderRadius.s};
       
       margin-bottom: ${({ theme }) => theme.indents.m};

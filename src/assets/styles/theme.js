@@ -1,5 +1,3 @@
-// zmienne globalne, funcke jak w csss, helpery
-
 export const theme = {
     colors: {
         backgroundColor: '#2d3d4b',
@@ -20,9 +18,11 @@ export const theme = {
         deleteIconBackgroundColorHover: '#ffffff',
 
         borderColor: '#e9e9e9',
+
+        darkColorSun: '#ffda2e',
+        lightColorSun: '#fae7a9',
     },
 
-    // font-size: ${({ theme }) => theme.fontSize.s};
     fontSize: {
         xxl: '36px',
         xl: '24px',
@@ -43,9 +43,7 @@ export const theme = {
         m: '16px',
     },
 
-  // padding: ${({ theme }) => theme.indents.s};
-  // margin: ${({ theme }) => theme.indents.s};
-  indents: {
+    indents: {
         xs: '4px',
         s: '8px',
         m: '16px',
@@ -60,5 +58,19 @@ export const theme = {
 
     height: {
         input: '56px',
-    }
+    },
 };
+
+export const lightTheme = {
+    backgroundColor: '#f1f1f1',
+    toggleBackgroundColor: '#097ed0',
+    fontColor: '#2d3d4b',
+    borderColor: '#bdb3b3',
+}
+
+export const darkTheme = {
+    backgroundColor: '#2d3d4b',
+    toggleBackgroundColor: '#366488',
+    fontColor: '#f3f3ff',
+    borderColor: '#e9e9e9',
+}

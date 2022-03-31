@@ -12,6 +12,7 @@ export const StyledLiItem = styled.li`
   &.autocomplete {
     &__selected-item {
       background-color: ${({ theme }) => theme.colors.selectedListItemBackgroundColor};
+
       margin: 0
               0
               ${({ theme }) => theme.indents.s}
