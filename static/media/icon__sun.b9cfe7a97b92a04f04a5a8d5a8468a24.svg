@@ -1,0 +1,19 @@
+<svg width="457" height="457" viewBox="0 0 457 457" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<g id="sun" clip-path="url(#clip0_1_2)">
+		<path id="first_ray_dark" d="M241.27 0H215.27V77.24H241.27V0Z" fill="#FFDE55"/>
+		<path id="second_ray_dark" d="M456.54 215.27H379.3V241.27H456.54V215.27Z" fill="#FFDE55"/>
+		<path id="third_ray_dark" d="M241.27 379.3H215.27V456.54H241.27V379.3Z" fill="#FFDE55"/>
+		<path id="fourth_ray_dark" d="M77.24 215.27H0V241.27H77.24V215.27Z" fill="#FFDE55"/>
+		<path id="first_ray_light" d="M325.872 112.283L344.257 130.667L398.873 76.0517L380.488 57.6671L325.872 112.283Z" fill="#FCEBA2"/>
+		<path id="second_ray_light" d="M344.257 325.872L325.872 344.257L380.488 398.873L398.873 380.488L344.257 325.872Z" fill="#FCEBA2"/>
+		<path id="third_ray_light" d="M57.6668 380.488L76.0514 398.873L130.667 344.257L112.283 325.873L57.6668 380.488Z" fill="#FCEBA2"/>
+		<path id="fourth_ray_light" d="M76.0522 57.6674L57.6676 76.052L112.283 130.668L130.668 112.283L76.0522 57.6674Z" fill="#FCEBA2"/>
+		<path id="light_circle" d="M228.267 352.274C296.752 352.274 352.27 296.756 352.27 228.271C352.27 159.786 296.752 104.268 228.267 104.268C159.782 104.268 104.264 159.786 104.264 228.271C104.264 296.756 159.782 352.274 228.267 352.274Z" fill="#FCEBA2"/>
+		<path id="dark_circle" d="M228.267 323.413C280.812 323.413 323.409 280.816 323.409 228.271C323.409 175.726 280.812 133.129 228.267 133.129C175.722 133.129 133.125 175.726 133.125 228.271C133.125 280.816 175.722 323.413 228.267 323.413Z" fill="#FFDE55"/>
+	</g>
+	<defs>
+		<clipPath id="clip0_1_2">
+			<rect width="456.54" height="456.54" fill="white"/>
+		</clipPath>
+	</defs>
+</svg>
