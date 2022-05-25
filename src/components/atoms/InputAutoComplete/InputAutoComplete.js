@@ -15,6 +15,7 @@ const InputAutoComplete = () => {
     return (
         <Input
             id="input-autocomplete"
+            data-testid="input"
             type="text" placeholder="Choose your technology"
             onChange={e => onChangeHandler(e.target.value)}
             value={inputText === undefined ? results[activeSuggestion] : inputText}

@@ -4,7 +4,8 @@ import SelectedListItem from "../../molecules/SelectedListItem/SelectedListItem"
 
 const SelectedList = () => {
     return (
-        <StyledList className={`autocomplete__selected-list`}>
+        <StyledList className={`autocomplete__selected-list`}
+                    data-testid="selected-list" >
             <SelectedListItem />
         </StyledList>
     );

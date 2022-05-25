@@ -8,15 +8,15 @@ const ThemeContext = ({ children }) => {
     const [ lightMode, setLightMode ] = useState(false);
 
     useEffect(() => {
-        const cartItemsData = JSON.parse(localStorage.getItem('cartItems'))
+        const themeMood = JSON.parse(localStorage.getItem('themeMood'))
 
-        if (cartItemsData) {
-            setLightMode(cartItemsData)
+        if (themeMood) {
+            setLightMode(themeMood)
         }
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('cartItems', JSON.stringify(lightMode))
+        localStorage.setItem('themeMood', JSON.stringify(lightMode))
     }, [lightMode])
 
     const toggleMode = () => {

@@ -8,8 +8,9 @@ const ResultList = () => {
 
     return (
         results.length > 0 &&
-        <StyledList className={`${emptyListClass} autocomplete__result-list`}>
-            <ResultListItem/>
+        <StyledList className={`${emptyListClass} autocomplete__result-list`}
+                    data-testid="result-list" >
+            <ResultListItem data-testid="result-list-item"/>
         </StyledList>
     )
 }
