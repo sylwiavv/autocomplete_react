@@ -69,7 +69,8 @@ const GlobalContext = ({ children }) => {
                 setInputText('');
                 setActiveSuggestion(0);
 
-            } else if (e.keyCode === ARROW_UP) {
+            }
+            else if (e.keyCode === ARROW_UP) {
                 let actualElement = activeSuggestion - 1;
                 setActiveSuggestion(activeSuggestion - 1);
 
@@ -81,7 +82,8 @@ const GlobalContext = ({ children }) => {
                 inputText = results[actualElement]
                 setInputText(inputText);
 
-            } else if (e.keyCode === ARROW_DOWN) {
+            }
+            else if (e.keyCode === ARROW_DOWN) {
                 let actualElement = activeSuggestion + 1;
                 setActiveSuggestion(actualElement);
 
@@ -97,12 +99,19 @@ const GlobalContext = ({ children }) => {
                 inputText = results[actualElement];
                 setInputText(inputText);
 
-            } else if (e.keyCode === BACKSPACE) {
+            }
+            else if (e.keyCode === BACKSPACE) {
                 if (inputText === "") {
                     setResults([]);
+                    selected.pop();
                     setSelected(0);
                 }
             }
+        }
+
+        if (e.keyCode === BACKSPACE && inputText === "") {
+            selected.pop();
+            setSelected([...selected]);
         }
     }
 
